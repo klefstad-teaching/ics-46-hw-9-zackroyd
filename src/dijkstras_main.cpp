@@ -2,7 +2,7 @@
 #include <iostream>
 
 int main() {
-    std::string filename = "src/largest.txt";
+    std::string filename = "src/large.txt";
     Graph G;
     file_to_graph(filename, G);
     vector<int> previous;
