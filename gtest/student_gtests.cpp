@@ -34,7 +34,7 @@ TEST(EditDistanceTests, OnlyNewLettersAtStart) {
 TEST(EditDistanceTests, NewLettersAndDifferent) {
   string word1 = "worldhgffo";
   string word2 = "hello";
-  EXPECT_TRUE(edit_distance_within(word1, word2, 7));
+  EXPECT_TRUE(edit_distance_within(word1, word2, 8));
 }
 
 
