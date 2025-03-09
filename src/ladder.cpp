@@ -34,17 +34,15 @@ vector<string> get_neighbors(string word/*, bool diff_size = true*/) {
     vector<string> res;
     int wordSize = word.size();
     for (int i = 0; i < wordSize; ++i) {
+        string curr = word.substr(0, 0 + i) + REPLACEMENT + word.substr(i);
+        res.push_back(curr);
+    }
+    res.push_back(word + REPLACEMENT);
+    for (int i = 0; i < wordSize; ++i) {
         string curr = word;
         curr[i] = REPLACEMENT;
         res.push_back(curr);
     }
-    //if (diff_size){
-        for (int i = 0; i < wordSize; ++i) {
-            string curr = word.substr(0, 0 + i) + REPLACEMENT + word.substr(i);
-            res.push_back(curr);
-        }
-        res.push_back(word + REPLACEMENT);
-    //}
     return res;
 }
 
@@ -76,6 +74,8 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
 
     return vector<string>{};
 }
+
+
 void load_words(set<string> & word_list, const string& file_name) {
     string line;
     ifstream fin;
