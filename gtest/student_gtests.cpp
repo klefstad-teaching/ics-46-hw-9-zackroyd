@@ -65,3 +65,9 @@ TEST(isAdjacent, RandomWordsNotAdjacent) {
   EXPECT_FALSE(edit_distance_within(word1, word2, 1));
   EXPECT_FALSE(is_adjacent(word1, word2));
 }
+
+
+TEST(GenerateNeighbors, allNeighbors) {
+  vector<string> neighbors = get_neighbors("pot");
+  for (string n : neighbors) std::cout << n << std::endl;
+}
