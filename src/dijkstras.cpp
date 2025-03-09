@@ -42,8 +42,6 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
 vector<int> extract_shortest_path(const vector<int>& distances, const vector<int>& previous, int destination) {
     stack<int> reversed_result;
     vector<int> result;
-    for (int i : previous) std::cout << i << ' ';
-    std::cout << std::endl;
     for (int curr = destination; curr != -1; curr = previous[curr]) {
         reversed_result.push(curr);
         if (reversed_result.size() > distances.size() + 10) break;
@@ -52,7 +50,7 @@ vector<int> extract_shortest_path(const vector<int>& distances, const vector<int
         result.push_back(reversed_result.top());
         reversed_result.pop();
     }
-    return result;
+    return previous;
 }
 
 void print_path(const vector<int>& v, int total) {
