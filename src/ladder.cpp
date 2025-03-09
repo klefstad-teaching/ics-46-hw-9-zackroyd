@@ -33,7 +33,6 @@ vector<string> get_neighbors(string word) {
     char REPLACEMENT = '*';
     vector<string> res;
     int wordSize = word.size();
-    res.push_back(word + REPLACEMENT);
     for (int i = wordSize - 1; i >= 0; --i) {
         string replace = word;
         replace[i] = REPLACEMENT;
@@ -42,6 +41,7 @@ vector<string> get_neighbors(string word) {
         string fill = word.substr(0, 0 + i) + REPLACEMENT + word.substr(i);
         res.push_back(fill);
     }
+    res.push_back(word + REPLACEMENT);
     return res;
 }
 
