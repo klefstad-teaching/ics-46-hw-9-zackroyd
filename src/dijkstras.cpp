@@ -1,18 +1,28 @@
 #include "dijkstras.h"
 #include <iostream>
+
+struct VertexWeight {
+    int vertex;
+    int weight;
+    friend bool operator<(const VertexWeight& first, const VertexWeight& other) {
+        return first.weight > other.weight;
+    }
+};
+
+
 vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& previous) {
     int n = G.size();
     vector<int> distances(n, INF);
     distances[source] = 0;
     previous.resize(n, -1);
     vector<bool> visited(n, false);
-    priority_queue<pair<int, int>> pq;
-    pq.push({source, 0});
+    priority_queue<VertexWeight> pq;
+    pq.push(VertexWeight{source, 0});
     
     while (!pq.empty()) {
-        pair<int, int> current = pq.top();
+        VertexWeight current = pq.top();
         pq.pop();
-        int u = current.first;
+        int u = current.vertex;
         if (visited[u]) continue;
         visited[u] = true;
         for (Edge e : G[u]) {
@@ -21,7 +31,7 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
             if (!visited[v] && distances[u] + weight < distances[v]) {
                 distances[v] = distances[u] + weight;
                 previous[v] = u;
-                pq.push({v, distances[v]});
+                pq.push(VertexWeight{v, distances[v]});
             }
         }
     }
