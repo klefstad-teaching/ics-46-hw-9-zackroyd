@@ -29,7 +29,7 @@ bool is_adjacent(const string& word1, const string& word2) {
 }
 
 
-vector<string> get_neighbors(string word) {
+vector<string> get_neighbors(string word/*, bool diff_size = true*/) {
     char REPLACEMENT = '*';
     vector<string> res;
     int wordSize = word.size();
@@ -38,11 +38,13 @@ vector<string> get_neighbors(string word) {
         curr[i] = REPLACEMENT;
         res.push_back(curr);
     }
-    for (int i = 0; i < wordSize; ++i) {
-        string curr = word.substr(0, 0 + i) + REPLACEMENT + word.substr(i);
-        res.push_back(curr);
-    }
-    res.push_back(word + REPLACEMENT);
+    //if (diff_size){
+        for (int i = 0; i < wordSize; ++i) {
+            string curr = word.substr(0, 0 + i) + REPLACEMENT + word.substr(i);
+            res.push_back(curr);
+        }
+        res.push_back(word + REPLACEMENT);
+    //}
     return res;
 }
 
@@ -83,6 +85,11 @@ void load_words(set<string> & word_list, const string& file_name) {
 
 
 void print_word_ladder(const vector<string>& ladder) {
+    if (word_ladder.size() == 0) {
+        std::cout << "No word ladder found." << std::endl;
+        return;
+    }
+    std::cout << "Word ladder found: ";
     for (string s : ladder) std::cout << s << ' ';
     std::cout << std::endl;
 }
