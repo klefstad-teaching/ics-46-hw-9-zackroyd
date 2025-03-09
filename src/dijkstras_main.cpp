@@ -8,7 +8,4 @@ int main() {
     vector<int> previous;
     vector<int> distances = dijkstra_shortest_path(G, 1, previous);
     for (size_t i = 0; i < G.size(); ++i) print_path(extract_shortest_path(distances, previous, i), distances[i]);
-    std::cout << distances.size();
-    //for (int i : previous) std::cout << i << std::endl;
-    //print_path(extract_shortest_path(distances, previous, 2), distances[2]);
 }
