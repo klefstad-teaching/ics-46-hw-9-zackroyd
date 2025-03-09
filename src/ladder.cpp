@@ -29,27 +29,26 @@ bool is_adjacent(const string& word1, const string& word2) {
 }
 
 
-vector<string> get_neighbors(string word/*, bool diff_size = true*/) {
+vector<string> get_neighbors(string word) {
     char REPLACEMENT = '*';
     vector<string> res;
     int wordSize = word.size();
-    for (int i = 0; i < wordSize; ++i) {
-        string curr = word.substr(0, 0 + i) + REPLACEMENT + word.substr(i);
-        res.push_back(curr);
-    }
     res.push_back(word + REPLACEMENT);
-    for (int i = 0; i < wordSize; ++i) {
-        string curr = word;
-        curr[i] = REPLACEMENT;
-        res.push_back(curr);
+    for (int i = wordSize - 1; i >= 0; --i) {
+        string fill = word.substr(0, 0 + i) + REPLACEMENT + word.substr(i);
+        res.push_back(fill);
+
+        string replace = word;
+        replace[i] = REPLACEMENT;
+        res.push_back(replace);
     }
     return res;
 }
 
 
 vector<string> generate_word_ladder(const string& begin_word, const string& end_word, const set<string>& word_list) {
-    map<string, set<string>> neighbors;
-    for (string word : word_list) for (string n : get_neighbors(word)) neighbors[n].insert(word);
+    map<string, vector<string>> neighbors;
+    for (string word : word_list) for (string n : get_neighbors(word)) neighbors[n].push_back(word);
     set<string> visited;
     queue<vector<string>> qV;
     qV.push(vector<string>{begin_word});
