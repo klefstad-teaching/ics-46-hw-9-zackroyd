@@ -37,3 +37,31 @@ TEST(EditDistanceTests, NewLettersAndDifferent) {
   EXPECT_TRUE(edit_distance_within(word1, word2, 7));
 }
 
+
+TEST(isAdjacent, ReturnsFalse) {
+  string word1 = "worldhgffo";
+  string word2 = "hello";
+  EXPECT_FALSE(is_adjacent(word1, word2));
+}
+
+
+TEST(isAdjacent, ReturnsTrueDifferingCharacter) {
+  string word1 = "helgo";
+  string word2 = "hello";
+  EXPECT_TRUE(is_adjacent(word1, word2));
+}
+
+
+TEST(isAdjacent, ReturnsFalseTwoDifferingCharacters) {
+  string word1 = "cat";
+  string word2 = "trap";
+  EXPECT_FALSE(is_adjacent(word1, word2));
+}
+
+
+TEST(isAdjacent, RandomWordsNotAdjacent) {
+  string word1 = "Ada";
+  string word2 = "stocked";
+  EXPECT_FALSE(edit_distance_within(word1, word2, 1));
+  EXPECT_FALSE(is_adjacent(word1, word2));
+}
