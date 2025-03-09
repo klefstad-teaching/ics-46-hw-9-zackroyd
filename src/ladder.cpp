@@ -19,7 +19,7 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
             matrix[i][j] = min({matrix[i-1][j] + 1, matrix[i][j-1] + 1, matrix[i-1][j-1] + subcost});
         }
     }
-    std::cout << "Distance Between " << str1 << " and " << str2 << ": " << matrix[str1.size()][str2.size()] << std::endl;
+    //std::cout << "Distance Between " << str1 << " and " << str2 << ": " << matrix[str1.size()][str2.size()] << std::endl;
     return matrix[str1.size()][str2.size()] == d;
 }
 
@@ -38,17 +38,15 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
         vector<string> ladder = ladder_queue.front();
         ladder_queue.pop();
         string last_word = ladder.back();
-        std::cout << "Last Word: " << last_word << std::endl;
+        //std::cout << "Last Word: " << last_word << std::endl;
         for (string word : word_list) {
-            if (is_adjacent(last_word, word)) {
-                if ((!visited.contains(word))) {
-                    std::cout << "Adjacency Found Between " << last_word << " and " << word << std::endl;
-                    visited.insert(word);
-                    vector<string> new_ladder = ladder;
-                    new_ladder.push_back(word);
-                    if (word == end_word) return new_ladder;
-                    ladder_queue.push(new_ladder);
-                }
+            if (!visited.contains(word) && is_adjacent(last_word, word)) {
+                //std::cout << "Adjacency Found Between " << last_word << " and " << word << std::endl;
+                visited.insert(word);
+                vector<string> new_ladder = ladder;
+                new_ladder.push_back(word);
+                if (word == end_word) return new_ladder;
+                ladder_queue.push(new_ladder);
             }
         }
     }
@@ -71,13 +69,16 @@ void print_word_ladder(const vector<string>& ladder) {
 void verify_word_ladder() {
     set<string> word_list;
     load_words(word_list, "src/words.txt");
-    std::cout << word_list.size() << std::endl;
-    vector<string> wordLadder1 = generate_word_ladder("cat", "dog", word_list);
-    print_word_ladder(wordLadder1);
-    /*my_assert(generate_word_ladder("cat", "dog", word_list).size() == 4);
+    //std::cout << "Starting cat and dog" << std::endl;
+    my_assert(generate_word_ladder("cat", "dog", word_list).size() == 4);
+    //std::cout << "Starting marty and curls" << std::endl;
     my_assert(generate_word_ladder("marty", "curls", word_list).size() == 6);
+    //std::cout << "Starting code and data" << std::endl;
     my_assert(generate_word_ladder("code", "data", word_list).size() == 6);
+    //std::cout << "Starting work and play" << std::endl;
     my_assert(generate_word_ladder("work", "play", word_list).size() == 6);
+    //std::cout << "Starting sleep and awake" << std::endl;
     my_assert(generate_word_ladder("sleep", "awake", word_list).size() == 8);
-    my_assert(generate_word_ladder("car", "cheat", word_list).size() == 4);*/
+    //std::cout << "Starting car and cheat" << std::endl;
+    my_assert(generate_word_ladder("car", "cheat", word_list).size() == 4);
 }
